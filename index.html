@@ -102,6 +102,14 @@
 
       var script = document.createElement("script");
       script.src = loaderUrl;
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Build.json", {
+    locateFile: function(filename) {
+        if (filename.endsWith(".data")) {
+            return "https://drive.google.com/file/d/16EZkIEZyFnLVw7T98pwNoRU-_e-eI-dl/view?usp=drive_link";
+        }
+        return "Build/" + filename;
+    }
+});
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
